@@ -3,7 +3,17 @@
   "name": "Twitter Timeout Redirect",
   "version": "1.0",
   "description": "Closes Twitter after 30 minutes and opens LeetCode.",
-  "permissions": ["tabs", "activeTab", "alarms"],
+  "permissions": [
+    "tabs", 
+    "activeTab", 
+    "alarms",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://twitter.com/*",
+    "https://leetcode.com/*",
+    "https://www.leetcode.com/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },
