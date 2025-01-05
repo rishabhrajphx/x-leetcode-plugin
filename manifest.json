@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Twitter Timeout Redirect",
+  "version": "1.0",
+  "description": "Closes Twitter after 30 minutes and opens LeetCode.",
+  "permissions": ["tabs", "activeTab", "alarms"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
