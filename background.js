@@ -12,7 +12,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       twitterStartTime = Date.now();
 
       // Set an alarm for 30 minutes
-      chrome.alarms.create("twitterTimeout", { delayInMinutes: 30 });
+      chrome.alarms.create("twitterTimeout", { delayInMinutes: 1 });
     }
   }
 });
