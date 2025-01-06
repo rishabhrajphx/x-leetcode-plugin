@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "x Timeout Redirect",
+  "name": "X Timeout Redirect",
   "version": "1.0",
   "description": "Closes x after 30 minutes and opens LeetCode.",
   "permissions": [
