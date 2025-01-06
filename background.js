@@ -16,7 +16,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
       xStartTime = Date.now();
 
       // Set an alarm for 20 minutes (changed from 1 minute)
-      chrome.alarms.create("xTimeout", { delayInMinutes: 1 });
+      chrome.alarms.create("xTimeout", { delayInMinutes: 20 });
       console.log("Timer started for x");
     }
   }
