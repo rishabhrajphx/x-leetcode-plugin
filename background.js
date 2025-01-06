@@ -1,46 +1,46 @@
-const TWITTER_URL = "https://twitter.com/*";
+const x_URL = "https://x.com/*";
 const LEETCODE_URL = "https://leetcode.com/";
 
-// Update the Twitter URL pattern to match more precisely
-const TWITTER_PATTERN = /^https:\/\/([\w-]+\.)?twitter\.com/;
+// Update the x URL pattern to match more precisely
+const x_PATTERN = /^https:\/\/([\w-]+\.)?x\.com/;
 
-let twitterTabId = null;
-let twitterStartTime = null;
+let xTabId = null;
+let xStartTime = null;
 
 // Listener for tab updates
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   // Only proceed if the URL has changed and the tab is complete
-  if (changeInfo.status === 'complete' && tab.url && TWITTER_PATTERN.test(tab.url)) {
-    if (twitterTabId !== tabId) {
-      twitterTabId = tabId;
-      twitterStartTime = Date.now();
+  if (changeInfo.status === 'complete' && tab.url && x_PATTERN.test(tab.url)) {
+    if (xTabId !== tabId) {
+      xTabId = tabId;
+      xStartTime = Date.now();
 
-      // Set an alarm for 30 minutes (changed from 1 minute)
-      chrome.alarms.create("twitterTimeout", { delayInMinutes: 30 });
-      console.log("Timer started for Twitter");
+      // Set an alarm for 20 minutes (changed from 1 minute)
+      chrome.alarms.create("xTimeout", { delayInMinutes: 1 });
+      console.log("Timer started for x");
     }
   }
 });
 
 // Listener for tab removal
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
-  if (tabId === twitterTabId) {
-    twitterTabId = null;
-    twitterStartTime = null;
-    chrome.alarms.clear("twitterTimeout");
+  if (tabId === xTabId) {
+    xTabId = null;
+    xStartTime = null;
+    chrome.alarms.clear("xTimeout");
   }
 });
 
 // Listener for alarms
 chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === "twitterTimeout" && twitterTabId) {
-    // Close Twitter tab
-    chrome.tabs.remove(twitterTabId, () => {
+  if (alarm.name === "xTimeout" && xTabId) {
+    // Close x tab
+    chrome.tabs.remove(xTabId, () => {
       // Open LeetCode
       chrome.tabs.create({ url: LEETCODE_URL });
       // Reset variables
-      twitterTabId = null;
-      twitterStartTime = null;
+      xTabId = null;
+      xStartTime = null;
     });
   }
 });
