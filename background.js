@@ -1,11 +1,18 @@
 const x_URL = "https://x.com/*";
-const LEETCODE_URL = "https://leetcode.com/";
+let redirectURL = "https://leetcode.com/"; // default value
 
 // Update the x URL pattern to match more precisely
 const x_PATTERN = /^https:\/\/([\w-]+\.)?x\.com/;
 
 let xTabId = null;
 let xStartTime = null;
+
+// Add this near the top to load saved redirect URL
+chrome.storage.sync.get(['redirectURL'], function(result) {
+    if (result.redirectURL) {
+        redirectURL = result.redirectURL;
+    }
+});
 
 // Listener for tab updates
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
@@ -34,11 +41,8 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 // Listener for alarms
 chrome.alarms.onAlarm.addListener((alarm) => {
   if (alarm.name === "xTimeout" && xTabId) {
-    // Close x tab
     chrome.tabs.remove(xTabId, () => {
-      // Open LeetCode
-      chrome.tabs.create({ url: LEETCODE_URL });
-      // Reset variables
+      chrome.tabs.create({ url: redirectURL }); // Use the dynamic redirectURL
       xTabId = null;
       xStartTime = null;
     });
