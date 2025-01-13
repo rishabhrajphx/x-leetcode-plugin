@@ -5,7 +5,8 @@
   "description": "Closes x after 15 minutes and opens LeetCode.",
   "permissions": [
     "tabs", 
-    "alarms"
+    "alarms",
+    "storage"
   ],
   "host_permissions": [
     "https://x.com/*",
@@ -18,5 +19,8 @@
   "icons": {
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html"
   }
 }
