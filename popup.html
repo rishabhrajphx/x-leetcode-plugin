@@ -4,37 +4,162 @@
     <title>X Timer Settings</title>
     <style>
         body {
-            width: 300px;
-            padding: 10px;
+            width: 320px;
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f5f7fa;
+        }
+        .container {
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2d3748;
+            margin: 0 0 20px 0;
+            font-size: 1.4em;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
         }
         .input-group {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
-        input {
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+        input, select {
             width: 100%;
-            padding: 5px;
-            margin-top: 5px;
+            padding: 8px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #4299e1;
+            outline: none;
         }
         button {
             width: 100%;
-            padding: 8px;
-            background-color: #4CAF50;
+            padding: 12px;
+            background: #4299e1;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
         }
         button:hover {
-            background-color: #45a049;
+            background: #3182ce;
+        }
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #4299e1;
+        }
+        input:checked + .slider:before {
+            transform: translateX(16px);
+        }
+        .support-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
         }
     </style>
 </head>
 <body>
-    <div class="input-group">
-        <label for="redirectUrl">Redirect Website URL:</label>
-        <input type="url" id="redirectUrl" placeholder="https://example.com">
+    <div class="container">
+        <h2>⚙️ LeetCode Enhancer Settings</h2>
+        
+        <div class="input-group">
+            <label>⏱️ Timer Settings</label>
+            <div class="toggle-switch">
+                <label class="switch">
+                    <input type="checkbox" id="timerEnabled">
+                    <span class="slider"></span>
+                </label>
+                <span>Enable Practice Timer</span>
+            </div>
+            <input type="number" id="timerDuration" placeholder="Timer duration (minutes)" min="5" value="30">
+        </div>
+
+        <div class="input-group">
+            <label>📈 Difficulty Level</label>
+            <select id="difficultyLevel">
+                <option value="all">All Difficulties</option>
+                <option value="easy">Easy Only</option>
+                <option value="medium">Medium Only</option>
+                <option value="hard">Hard Only</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>🔗 Redirect URL</label>
+            <input type="url" id="redirectUrl" placeholder="https://example.com">
+        </div>
+
+        <div class="input-group">
+            <label>🎯 Daily Goals</label>
+            <div class="toggle-switch">
+                <label class="switch">
+                    <input type="checkbox" id="goalEnabled">
+                    <span class="slider"></span>
+                </label>
+                <span>Enable Daily Goals</span>
+            </div>
+            <input type="number" id="dailyProblems" placeholder="Target problems per day" min="1">
+            <input type="number" id="dailyHours" placeholder="Target hours per day" min="1" step="0.5" style="margin-top: 8px;">
+        </div>
+
+        <button id="saveButton">💾 Save Settings</button>
+
+        <div class="support-section">
+            <button id="supportButton" style="background: #48bb78; margin-top: 15px;">☕ Support the Developer</button>
+        </div>
     </div>
-    <button id="saveButton">Save Settings</button>
     <script src="popup.js"></script>
 </body>
 </html> 
